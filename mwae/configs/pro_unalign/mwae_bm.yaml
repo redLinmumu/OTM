@@ -1,0 +1,63 @@
+backend: 'torch'
+verbose: 1
+
+seed: 123
+
+use_gpu: True
+
+split:
+  tau: 1.673443007398671  #  rec
+  eta: 10.866358680714054  #  reg
+  alpha: 0.7819010945472544 # mix
+
+data:
+  type: pro #
+  unaligned_rate: 1.0  
+  splits: [1.0, 0.0, 0.0]
+  correspondence: False   
+  root: data/
+  cluster_num: 1    
+  num_views: 1
+  modality_feature_names: []
+  modality_feature_dims: []     
+
+model:
+  h_dim: 811
+  z_dim: 1368
+
+mixer:
+  inner_iter: 5
+  loss_fn: L2 # KL
+  gw_method: 'fgw'  # 'w'
+  consist: False  # consist fgw or not
+  f_alpha: 0.190666
+
+train:
+  batch_or_epoch: epoch
+  local_update_steps: 120    # epoch
+  
+  batch_size: 400
+
+  optimizer:
+    type: Adam
+    lr: 1.066875007877102e-05
+    weight_decay: 0.0
+
+  scheduler:
+    type: ReduceLROnPlateau
+    mode: 'max'
+    factor: 0.95
+    patience: 10
+    threshold: 1e-7
+    min_lr: 1e-8
+
+nni: True
+
+device: 1  
+baseline: mwae_b0
+outdir:
+  save_to: mwae
+  restore_from: mwae
+  dir: mwae
+  expname: x
+  expname_tag: bm

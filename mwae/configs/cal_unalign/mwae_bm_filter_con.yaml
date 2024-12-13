@@ -1,0 +1,70 @@
+backend: 'torch'
+verbose: 1
+
+
+seed: 123
+
+use_gpu: True
+
+split:
+  tau: 31.84555754817123
+  eta: 0.011698056434557142
+  alpha: 0.24950167093898748
+
+data:
+  type: caltech7  
+  unaligned_rate: 1.0 
+  splits: [1.0, 0, 0]
+  correspondence: False   
+  root: data/
+  cluster_num: 1    
+  num_views: 1
+  modality_feature_names: []
+  modality_feature_dims: []     
+  is_filter: True
+  filter_num: 2
+  valid_tsne: True
+
+model:
+  h_dim: 88   
+  z_dim: 1748   
+  is_save: True
+  is_load: True
+
+mixer:
+  inner_iter: 5  
+  loss_fn: L2 # KL
+  gw_method: 'fgw'  # 'w'
+  consist: False  # consist fgw or not
+  f_alpha: 0.667331
+  fuse: 'con'
+
+train:
+  batch_or_epoch: epoch
+  local_update_steps: 880    # epoch
+  
+  batch_size: 400  
+
+  optimizer:
+    type: Adam
+    lr: 0.0006991542191951219
+    weight_decay: 0.0
+
+  scheduler:
+    type: ReduceLROnPlateau
+    mode: 'max'
+    factor: 0.95
+    patience: 10
+    threshold: 1e-7
+    min_lr: 1e-8
+
+nni: True
+
+device: 1  
+baseline: mwae_b0
+outdir:
+  save_to: mwae
+  restore_from: mwae
+  dir: mwae
+  expname: cal
+  expname_tag: unalign
