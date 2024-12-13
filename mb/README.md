@@ -47,4 +47,4 @@ Before running our code,  please make sure that you have a suitable environment 
 
 [Notice]:
 
-Some Multibench codes are not included in our rep, and they can be found in the Multibenc rep, and we just remove them for the uploading  size restrictions. 
+Some Multibench codes are not included in our rep, and they can be found in the Multibench rep, and we just remove them for the uploading  size restrictions. 
